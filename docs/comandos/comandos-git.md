@@ -13,5 +13,14 @@ git clone direccion_repositorio
 ```
 ### Referencia de repositorio Local con Remoto
 - En necesario crear un nuevo repositorio en GITHUB
-
-
+- Luego git remote add repositorio_remoto
+```
+git remote add origin https://github.com/cchura94/backend_laravel_vue_proy.git
+```
+----
+## Comandos para publicar nuevos cambios al reposotorio remoto
+```
+git add .
+git commit -m "Autenticacion con Laravel Api Rest"
+git push origin master
+```
