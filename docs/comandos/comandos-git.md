@@ -1,6 +1,11 @@
 # Comandos GIT & (GITHUB)
 ## Descargar e Instalar GIT
 - https://git-scm.com/
+
+```
+git config --global user.name "Su Nombre"
+git config --global user.email "sucorreo@mail.com"
+```
 ## Crear una cuenta en GITHUB (Bitbucket, GitLab)
 - https://github.com
 -----
