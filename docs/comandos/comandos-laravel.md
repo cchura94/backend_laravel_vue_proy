@@ -8,3 +8,19 @@ php artisan install:api
 ```
 php artisan make:controller AuthController
 ```
+## BASES DE DATOS
+### Comandos de Migraciones
+
+```
+php artisan migrate 
+php artisan migrate:rollback 
+php artisan migrate:status
+php artisan migrate:fresh
+
+php artisan make:migration create_personas_table
+
+```
+## Modelos
+```
+php artisan make:model Persona
+```
