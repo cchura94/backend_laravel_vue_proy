@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
@@ -11,7 +12,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = DB::table("categorias")->get();
+        return response()->json($categorias);
     }
 
     /**
@@ -19,7 +21,14 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::table("categorias")->insert([
+            "nombre" => $request->nombre,
+            "detalle" => $request->detalle,
+            'created_at' => now(), 
+            'updated_at' => now(), 
+        ]);
+        return response()->json(["mensaje" => "categoria registrada"]);
+
     }
 
     /**
@@ -27,7 +36,9 @@ class CategoriaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $categoria = DB::table("categorias")->where("id", $id)->first();
+
+        return response()->json($categoria, 200);
     }
 
     /**
@@ -35,7 +46,14 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::table("categorias")
+            ->where('id', $id)
+            ->update([
+                "nombre" => $request->nombre,
+                "detalle" => $request->detalle,
+                'updated_at' => now(), 
+            ]);
+        return response()->json(["mensaje" => "categoria actualizada"]);
     }
 
     /**
@@ -43,6 +61,10 @@ class CategoriaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table("categorias")
+        ->where('id', $id)->delete();
+
+        return response()->json(["mensaje" => "categoria eliminada"]);
+
     }
 }
