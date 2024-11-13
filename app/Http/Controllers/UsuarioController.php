@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 
+use function Laravel\Prompts\confirm;
+
 class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::get();
+
+        $usuarios = User::with(["persona"])->where("name", "LIKE", "%$request->q%")->get();
 
         return response()->json($usuarios, 200);
     }
@@ -55,7 +58,7 @@ class UsuarioController extends Controller
     {
         $request->validate([
             "name" => "required",
-            "email" => "required|email|unique:users",
+            "email" => "required|email|unique:users,email,$id",
             "password" => "required",
         ]);
         
@@ -74,7 +77,7 @@ class UsuarioController extends Controller
     public function destroy(string $id)
     {
         $usuario = User::find($id);
-        // $usuario->delete();
+        $usuario->delete();
         return response()->json(["mensaje" => "Usuario Eliminado"], 200);        
     }
 }
