@@ -21,6 +21,11 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            "nombre" => "required|unique:categorias"
+        ]);
+
         DB::table("categorias")->insert([
             "nombre" => $request->nombre,
             "detalle" => $request->detalle,
@@ -46,6 +51,10 @@ class CategoriaController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
+        $request->validate([
+            "nombre" => "required|unique:categorias,nombre,".$id
+        ]);
         DB::table("categorias")
             ->where('id', $id)
             ->update([
