@@ -1,0 +1,40 @@
+GET http://127.0.0.1:8000/api/producto?page=1&limit=3&q=
+Accept: application/json
+Authorization: Bearer 3|ye5fNCsBTYQfAkMzEwOvUXfWNcb1OUttQIph6XyZ7620f3dc
+
+
+### Guardar producto
+
+POST http://127.0.0.1:8000/api/producto
+Accept: application/json
+Authorization: Bearer 3|ye5fNCsBTYQfAkMzEwOvUXfWNcb1OUttQIph6XyZ7620f3dc
+Content-Type: application/json
+
+{
+    "nombre": "PARLANTES",
+    "precio": "69.99",
+    "stock": 20,
+    "descripcion": "Parlantes ",
+    "categoria_id": 3
+}
+
+###
+GET http://127.0.0.1:8000/api/producto/4
+Accept: application/json
+Authorization: Bearer 3|ye5fNCsBTYQfAkMzEwOvUXfWNcb1OUttQIph6XyZ7620f3dc
+Content-Type: application/json
+
+### modificar
+PUT http://127.0.0.1:8000/api/producto/4
+Accept: application/json
+Authorization: Bearer 3|ye5fNCsBTYQfAkMzEwOvUXfWNcb1OUttQIph6XyZ7620f3dc
+Content-Type: application/json
+
+{
+  "nombre": "PARLANTES de PRUEBA modificado",
+  "precio": "69.99",
+  "stock": 20,
+  "imagen": null,
+  "descripcion": "Parlantes de Prueba",
+  "categoria_id": 3
+}
