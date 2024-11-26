@@ -1,6 +1,6 @@
-GET http://127.0.0.1:8000/api/producto?page=1&limit=3&q=
+GET http://127.0.0.1:8000/api/producto?page=1&limit=5&q=
 Accept: application/json
-Authorization: Bearer 3|ye5fNCsBTYQfAkMzEwOvUXfWNcb1OUttQIph6XyZ7620f3dc
+Authorization: Bearer 4|6DzUPBc1jo2956cUAjEz2YdkrK4OnF24l07j1gtg825cbce2
 
 
 ### Guardar producto
@@ -18,7 +18,7 @@ Content-Type: application/json
     "categoria_id": 3
 }
 
-###
+### mostrar
 GET http://127.0.0.1:8000/api/producto/4
 Accept: application/json
 Authorization: Bearer 3|ye5fNCsBTYQfAkMzEwOvUXfWNcb1OUttQIph6XyZ7620f3dc

@@ -32,6 +32,8 @@ Route::prefix('v1/auth')->group(function(){
     });
 });
 
+Route::get("producto-public", [ProductoController::class, "funGetProductos"]);
+
 Route::middleware('auth:sanctum')->group(function(){
 
     Route::apiResource("categoria", CategoriaController::class);
@@ -45,6 +47,9 @@ Route::middleware('auth:sanctum')->group(function(){
 
 });
 
+Route::get("no-autorizado", function(){
+    return response()->json(["message" => "No está autorizado, debe loguearse"]);
+})->name("login");
 
 
 
