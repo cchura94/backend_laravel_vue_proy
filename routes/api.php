@@ -36,6 +36,8 @@ Route::get("producto-public", [ProductoController::class, "funGetProductos"]);
 
 Route::middleware('auth:sanctum')->group(function(){
 
+    Route::get("cliente-buscar", [ClienteController::class, "buscarCliente"]);
+
     Route::apiResource("categoria", CategoriaController::class);
     Route::apiResource("producto", ProductoController::class);
     Route::apiResource("cliente", ClienteController::class);

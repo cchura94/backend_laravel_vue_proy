@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class ClienteController extends Controller
 {
@@ -11,7 +13,9 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Cliente::get();
+
+        return response()->json($clientes);
     }
 
     /**
@@ -19,7 +23,19 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "nombre_completo" => "required"
+        ]);
+
+        $cliente = new Cliente();
+        $cliente->nombre_completo = $request->nombre_completo;
+        $cliente->correo = $request->correo;
+        $cliente->telefono = $request->telefono;
+        $cliente->direccion = $request->direccion;
+        $cliente->save();
+
+        return response()->json($cliente, 201);
+
     }
 
     /**
@@ -44,5 +60,13 @@ class ClienteController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function buscarCliente(Request $request){
+        $cliente = Cliente::where("nombre_completo", "LIKE", "%".$request->q."%")
+                            ->orWhere("correo", "LIKE", "%".$request->q."%")
+                            ->first();
+
+        return response()->json($cliente, 200);
     }
 }
