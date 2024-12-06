@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class PedidoController extends Controller
 {
     /**
@@ -18,6 +20,12 @@ class PedidoController extends Controller
         $pedidos = Pedido::orderBy('id', 'desc')
                             ->with(["cliente", "productos", "user"])->paginate(10);
         return response()->json($pedidos);
+    }
+
+    public function reciboPDF($id){
+        $pedido = Pedido::with(["user", "cliente", "productos"])->findOrFail($id);
+        $pdf = Pdf::loadView('pdf.recibo', ["data" => $pedido]);
+        return $pdf->stream('recibo.pdf');
     }
 
     /**

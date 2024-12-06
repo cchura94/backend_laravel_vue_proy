@@ -23,6 +23,8 @@ return new class extends Migration
             $table->bigInteger("categoria_id")->unsigned();
             $table->foreign("categoria_id")->references("id")->on("categorias");
 
+            $table->softDeletes(); // deleted_at
+
             $table->timestamps();
         });
     }

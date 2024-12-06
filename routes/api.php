@@ -34,7 +34,10 @@ Route::prefix('v1/auth')->group(function(){
 
 Route::get("producto-public", [ProductoController::class, "funGetProductos"]);
 
+// reporte PDF
 Route::middleware('auth:sanctum')->group(function(){
+    
+    Route::get("pedido/{id}/recibo", [PedidoController::class, "reciboPDF"]);
 
     Route::get("cliente-buscar", [ClienteController::class, "buscarCliente"]);
 
