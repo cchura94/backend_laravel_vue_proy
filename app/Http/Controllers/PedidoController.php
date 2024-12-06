@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PedidoExport;
 use App\Models\Pedido;
 use App\Models\Producto;
 use Illuminate\Http\Request;
@@ -9,9 +10,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Excel;
 
 class PedidoController extends Controller
 {
+    private $excel;
+
+    public function __construct(Excel $excel)
+    {
+        $this->excel = $excel;         
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -92,6 +101,10 @@ class PedidoController extends Controller
             // respuesta error
             return response()->json(["mensaje" => "ocurrió un error al registrar el pedido", "error" => $e->getMessage()], 422);
         }
+    }
+
+    public function exportarExcel(){
+        return $this->excel->download(new PedidoExport, 'pedidos.xlsx');
     }
 
     /**
